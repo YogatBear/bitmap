@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat({{columns}}, 30px);
+        grid-template-rows: repeat({{rows}}, 30px);
+      }
+
+    </style>
+  </head>
+    
+  <body>
+    <div class="grid">
+      {% for i in range(output|length) %}
+        <meta id="i">
+        <input type="submit" class='wcell' id='{{i}}' value=0>
+      {% endfor %}
+    </div>
+
+    <p><input type = "submit" class = "calculate" value = "CALCULATE"></p>
+
+    <script type=text/javascript>
+        $(document).ready(function(){
+          $('.wcell').click(function(){
+            $(this).toggleClass('bcell');
+            if ($(this).val() == 0){
+              $(this).val(1);
+            } else {
+              $(this).val(0);
+            }
+          });
+
+          $('.calculate').click(function(){
+            var array = [];
+            var rows = {{rows}}
+            var columns = {{columns}}
+            $('.wcell').each(function(){
+              array.push($(this).val());
+            });
+            $.ajax({
+              type: 'POST',
+              url: '/plot',
+              data: {output2: JSON.stringify(array), rows: rows, columns: columns},
+              success: function(response){
+                document.write(response);
+              }
+            });     
+          });
+        });
+    </script>
+  </body>
+</html>

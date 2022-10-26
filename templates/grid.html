@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat({{columns}}, 30px);
+        grid-template-rows: repeat({{rows}}, 30px);
+      }
+
+    </style>
+  </head>
+    
+  <body>
+    <div class="grid">
+      {% for i in output %}
+        {% if i == 1 %}
+          <div class="bcell"></div>
+        {% else %}
+          <div class="wcell"></div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <form action="/plot" method="POST">
+      <input type="hidden" id="rows" name='rows' value="{{rows}}">
+      <input type="hidden" id="columns" name='columns' value="{{columns}}">
+      <input type="hidden" id="bits" name='output' value="{{output}}">
+      <p><input type = "submit" value = "CALCULATE"></p>
+    </form>
+
+  </body>
+</html>
