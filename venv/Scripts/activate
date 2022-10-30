@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\yoav1\source\repos\bitmap\venv"
+VIRTUAL_ENV="C:\Users\yoav1\Documents\GitHub\bitmap\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

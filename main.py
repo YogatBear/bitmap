@@ -61,5 +61,4 @@ def plot():
         return render_template('plot.html', output=output, colors=colors, columns=columns, rows=rows, labels=labels)
 
 if __name__ == '__main__':
-    app.debug = True
     app.run()
